@@ -1,10 +1,10 @@
 fun main(args: Array<String>) {
-    val array = arrayOf(5, 4, 3, 2, 1)
+    val array = mutableListOf(5, 4, 3, 2, 1)
     bubbleSort(array)
     insertSort(array)
 }
 
-fun bubbleSort(array: Array<Int>) {
+fun bubbleSort(array: MutableList<Int>) {
     for (i in 0 until array.size - 1) {
         for (j in 0 until array.size - i - 1) {
             if (array[j] > array[j + 1]) {
@@ -16,7 +16,7 @@ fun bubbleSort(array: Array<Int>) {
     }
 }
 
-fun insertSort(array: Array<Int>) {
+fun insertSort(array: MutableList<Int>) {
     for(i in 1 until array.size){
         var index = i
         var temp = array[i]
@@ -26,4 +26,48 @@ fun insertSort(array: Array<Int>) {
         }
         array[index]= temp
     }
+}
+
+fun mergeSort(array: List<Int>): List<Int> {
+    if (array.size < 2) return array
+
+    val (front, rear) = split(array)
+    return merge(mergeSort(front), mergeSort(rear))
+}
+
+fun split(array: List<Int>): Pair<List<Int>, List<Int>> {
+    val mid = array.size / 2
+    return Pair(array.subList(0, mid), array.subList(mid, array.size))
+}
+fun merge(left:List<Int>, right:List<Int>): List<Int> {
+    var l_idx = 0
+    var r_idx = 0
+
+    val result = mutableListOf<Int>()
+
+    while (l_idx < left.size && r_idx < right.size) {
+        val l_v = left[l_idx]
+        val r_v = right[r_idx]
+
+        if (l_v < r_v) {
+            result.add(l_v)
+            l_idx += 1
+        } else if (l_v > r_v) {
+            result.add(r_v)
+            r_idx += 1
+        } else {
+            result.add(l_v)
+            result.add(r_v)
+            l_idx += 1
+            r_idx += 1
+        }
+    }
+
+    if (l_idx < left.size) {
+        result.addAll(left.subList(l_idx, left.size))
+    }
+    if (r_idx < right.size) {
+        result.addAll(right.subList(r_idx, right.size))
+    }
+    return result
 }
