@@ -71,3 +71,22 @@ fun merge(left:List<Int>, right:List<Int>): List<Int> {
     }
     return result
 }
+
+fun quickSort(arr: IntArray, start: Int, end: Int) {
+    if (start + 1 > end) return
+    val pivot = arr[end]
+    var i = start - 1
+
+    for (j in start..end-1) {
+        if (arr[j] < pivot) {
+            i += 1
+            val term = arr[j]
+            arr[j] = arr[i]
+            arr[i] = term
+        }
+    }
+    arr[end] = arr[i+1]
+    arr[i+1] = pivot
+    quickSort(arr, start, i) // pivot 기존 왼쪽 배열 정렬
+    quickSort(arr, i+2, end) // pivot 기존 오른쪽 배열 정렬
+}
