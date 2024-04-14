@@ -1,7 +1,9 @@
 fun main(args: Array<String>) {
     val array = mutableListOf(5, 4, 3, 2, 1)
-    bubbleSort(array)
-    insertSort(array)
+//    bubbleSort(array)
+//    insertSort(array)
+//    mergeSort(array)
+    quickSort(array.toIntArray(), 0, array.size - 1)
 }
 
 fun bubbleSort(array: MutableList<Int>) {
