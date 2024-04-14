@@ -5,8 +5,8 @@ fun main(args: Array<String>) {
 }
 
 fun bubbleSort(array: MutableList<Int>) {
-    for (i in 0 until array.size - 1) {
-        for (j in 0 until array.size - i - 1) {
+    for (i in 0..<array.size - 1) {
+        for (j in 0..<array.size - i - 1) {
             if (array[j] > array[j + 1]) {
                 val temp = array[j]
                 array[j] = array[j + 1]
@@ -17,14 +17,14 @@ fun bubbleSort(array: MutableList<Int>) {
 }
 
 fun insertSort(array: MutableList<Int>) {
-    for(i in 1 until array.size){
+    for (i in 1..<array.size) {
         var index = i
         var temp = array[i]
-        while (index>0 && array[index-1]>temp){
-            array[index] = array[index-1]
+        while (index > 0 && array[index - 1] > temp) {
+            array[index] = array[index - 1]
             index--
         }
-        array[index]= temp
+        array[index] = temp
     }
 }
 
@@ -39,7 +39,8 @@ fun split(array: List<Int>): Pair<List<Int>, List<Int>> {
     val mid = array.size / 2
     return Pair(array.subList(0, mid), array.subList(mid, array.size))
 }
-fun merge(left:List<Int>, right:List<Int>): List<Int> {
+
+fun merge(left: List<Int>, right: List<Int>): List<Int> {
     var l_idx = 0
     var r_idx = 0
 
@@ -62,7 +63,6 @@ fun merge(left:List<Int>, right:List<Int>): List<Int> {
             r_idx += 1
         }
     }
-
     if (l_idx < left.size) {
         result.addAll(left.subList(l_idx, left.size))
     }
@@ -77,7 +77,7 @@ fun quickSort(arr: IntArray, start: Int, end: Int) {
     val pivot = arr[end]
     var i = start - 1
 
-    for (j in start..end-1) {
+    for (j in start..end - 1) {
         if (arr[j] < pivot) {
             i += 1
             val term = arr[j]
@@ -85,8 +85,8 @@ fun quickSort(arr: IntArray, start: Int, end: Int) {
             arr[i] = term
         }
     }
-    arr[end] = arr[i+1]
-    arr[i+1] = pivot
+    arr[end] = arr[i + 1]
+    arr[i + 1] = pivot
     quickSort(arr, start, i) // pivot 기존 왼쪽 배열 정렬
-    quickSort(arr, i+2, end) // pivot 기존 오른쪽 배열 정렬
+    quickSort(arr, i + 2, end) // pivot 기존 오른쪽 배열 정렬
 }
